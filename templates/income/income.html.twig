@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formModal">
+  New income
+</button>
+
+    <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formModal">Add a new income</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{form_start(form)}}
+                        {{form_widget(form)}}
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for income in incomes %}
+        <div class="card m-4">
+            <div class="card-body">
+                <h5 class="card-title">{{income.title}}</h5>
+                <p class="card-text">{{income.amount}}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

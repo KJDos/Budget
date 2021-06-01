@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newOutcomeModal">
+  New outcome
+</button>
+
+    <div class="modal fade" id="newOutcomeModal" tabindex="-1" aria-labelledby="newOutcomeModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newOutcomeModal">Add a new outcome</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{form_start(form)}}
+                        {{form_widget(form)}}
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% for outcome in outcomes %}
+        <div class="card m-4">
+            <div class="card-body">
+                <h5 class="card-title">{{outcome.title}}</h5>
+                <p class="card-text">{{outcome.amount}}</p>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

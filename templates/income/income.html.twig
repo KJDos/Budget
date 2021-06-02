@@ -28,6 +28,27 @@
             <div class="card-body">
                 <h5 class="card-title">{{income.title}}</h5>
                 <p class="card-text">{{income.amount}}</p>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editIncomeModal{{income.id}}">Edit</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editIncomeModal{{income.id}}" tabindex="-1" aria-labelledby="editIncomeModal{{income.id}}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editIncomeModal{{income.id}}">Edit {{income.title}} income</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{path('edit_income', {'id': income.id})}}" method="POST">
+                            <label for="title">title</label>
+                            <input type="text" name="title" id="title" placeholder="{{income.title}}">
+                            <label for="amount">amount</label>
+                            <input type="number" name="amount" id="amount" placeholder="{{income.amount}}">
+                            <button type="submit">OK</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     {% endfor %}

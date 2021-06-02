@@ -24,7 +24,6 @@ class Outcome
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Length(min=2, max=255, minMessage="Too short ! 3 letters min.", maxMessage="Too long ! 255 letters max.")
-     * @Assert\Type("alpha", message="Must be a text.")
      */
     private $title;
 

@@ -37,8 +37,27 @@ class OutcomeController extends AbstractController
 
         return $this->render('outcome/outcome.html.twig', [
             'outcomes' => $outcomes,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/outcome/{id}/edit", name="edit_outcome")
+     */
+    public function edit($id, OutcomeRepository $repo, Request $request, EntityManagerInterface $manager)
+    {
+        $outcome = $repo->find($id);
+        $titleValue = $request->get('title');
+        $amountValue = $request->get('amount');
+
+        $outcome
+            ->setTitle($titleValue)
+            ->setAmount($amountValue)
+        ;
+        $manager->persist($outcome);
+        $manager->flush();
+
+        return $this->redirectToRoute('outcome');
     }
 
 }

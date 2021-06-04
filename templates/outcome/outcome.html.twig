@@ -29,27 +29,8 @@
             <div class="card-body">
                 <h5 class="card-title">{{outcome.title}}</h5>
                 <p class="card-text">{{outcome.amount}}</p>
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editOutcomeModal{{outcome.id}}">Edit</button>
-            </div>
-        </div>
-
-        <div class="modal fade" id="editOutcomeModal{{outcome.id}}" tabindex="-1" aria-labelledby="editOutcomeModal{{outcome.id}}" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editOutcomeModal{{outcome.id}}">Edit {{outcome.title}} outcome</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{path('edit_outcome', {'id': outcome.id})}}" method="POST">
-                            <label for="title">title</label>
-                            <input type="text" name="title" id="title" placeholder="{{outcome.title}}">
-                            <label for="amount">amount</label>
-                            <input type="number" name="amount" id="amount" placeholder="{{outcome.amount}}">
-                            <button type="submit">OK</button>
-                        </form>
-                    </div>
-                </div>
+                <button type="button" class="btn btn-secondary"><a href="{{path('edit_outcome', {'id':outcome.id})}}">Edit</a></button>
+                <button type="button" class="btn btn-danger"><a href="{{path('remove_outcome', {'id':outcome.id})}}">Remove</a></button>
             </div>
         </div>
     {% endfor %}

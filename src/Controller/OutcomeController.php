@@ -30,7 +30,7 @@ class OutcomeController extends AbstractController
 
             $this->addFlash(
                 'success',
-                "Income <strong>{$outcome->getTitle()}</strong> has been added."
+                "outcome <strong>{$outcome->getTitle()}</strong> has been added."
             );
             return $this->redirectToRoute('outcome');
         }
@@ -47,15 +47,39 @@ class OutcomeController extends AbstractController
     public function edit($id, OutcomeRepository $repo, Request $request, EntityManagerInterface $manager)
     {
         $outcome = $repo->find($id);
-        $titleValue = $request->get('title');
-        $amountValue = $request->get('amount');
+        $form = $this->createForm(outcomeType::class, $outcome);
 
-        $outcome
-            ->setTitle($titleValue)
-            ->setAmount($amountValue)
-        ;
-        $manager->persist($outcome);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($outcome);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Outcome <strong>{$outcome->getTitle()}</strong> has been modified."
+            );
+
+            return $this->redirectToRoute('outcome');
+        }
+
+        return $this->render('commons/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/outcome/{id}/remove", name="remove_outcome")
+     *
+     * @return void
+     */
+    public function remove($id, OutcomeRepository $repo, EntityManagerInterface $manager)
+    {
+
+        $outcome = $repo->find($id);
+
+        $manager->remove($outcome);
         $manager->flush();
+
 
         return $this->redirectToRoute('outcome');
     }

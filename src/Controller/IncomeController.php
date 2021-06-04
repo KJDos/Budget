@@ -47,14 +47,39 @@ class IncomeController extends AbstractController
     public function edit($id, IncomeRepository $repo, Request $request, EntityManagerInterface $manager)
     {
         $income = $repo->find($id);
-        $titleValue = $request->get('title');
-        $amountValue = $request->get('amount');
+        $form = $this->createForm(IncomeType::class, $income);
 
-        $income
-            ->setTitle($titleValue)
-            ->setAmount($amountValue);
-        $manager->persist($income);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($income);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Income <strong>{$income->getTitle()}</strong> has been modified."
+            );
+
+            return $this->redirectToRoute('income');
+        }
+
+        return $this->render('commons/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+        
+    }
+
+    /**
+     * @Route("/income/{id}/remove", name="remove_income")
+     *
+     * @return void
+     */
+    public function remove($id, IncomeRepository $repo, EntityManagerInterface $manager){
+
+        $income = $repo->find($id);
+
+        $manager->remove($income);
         $manager->flush();
+
 
         return $this->redirectToRoute('income');
     }

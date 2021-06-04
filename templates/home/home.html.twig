@@ -1,17 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Budgetizer Home{% endblock %}
+{% set currentUrl = app.request.get('_route') %}
 
 {% block body %}
-<div class="row">
-  <div class="col-6 bg-success text-white">
-    {{incomes}}
-  </div>
-  <div class="col-6 bg-warning text-white">
-    {{outcomes}}
-  </div>
-</div>
-<div class="row bg-danger">
-  {{total}}
-</div>
+<p class="bidule">Lorem, ipsum dolor.</p>
+  <p class="fs-1">You earned {{incomes}} €...</p>
+  <p class="fs-1 text-end">... you'll spend {{outcomes}} €.</p>
+  <p class="fs-1 text-center mt-5">So you can save {{total}} €.</p>
 {% endblock %}

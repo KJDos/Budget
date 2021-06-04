@@ -35,7 +35,7 @@ class OutcomeController extends AbstractController
             return $this->redirectToRoute('outcome');
         }
 
-        return $this->render('outcome/outcome.html.twig', [
+        return $this->render('commons/render.html.twig', [
             'outcomes' => $outcomes,
             'form' => $form->createView(),
         ]);

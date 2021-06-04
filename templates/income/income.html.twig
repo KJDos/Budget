@@ -24,14 +24,10 @@
     </div>
 
     {% for income in incomes %}
-        <div class="card m-4">
-            <div class="card-body">
-                <h5 class="card-title">{{income.title}}</h5>
-                <p class="card-text">{{income.amount}}</p>
-                <button type="button" class="btn btn-secondary"><a href="{{path('edit_income', {'id':income.id})}}">Edit</a></button>
-                <button type="button" class="btn btn-danger"><a href="{{path('remove_income', {'id':income.id})}}">Remove</a></button>
-            </div>
-        </div>
+        {% set title = income.title %}
+        {% set amount = income.amount %}
+        {% set id = income.id %}
+        {% include "commons/card.html.twig" %}
     {% endfor %}
 
 {% endblock %}

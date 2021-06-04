@@ -19,20 +19,15 @@
                         {{form_widget(form)}}
                     {{form_end(form)}}
                 </div>
-
             </div>
         </div>
     </div>
 
     {% for outcome in outcomes %}
-        <div class="card m-4">
-            <div class="card-body">
-                <h5 class="card-title">{{outcome.title}}</h5>
-                <p class="card-text">{{outcome.amount}}</p>
-                <button type="button" class="btn btn-secondary"><a href="{{path('edit_outcome', {'id':outcome.id})}}">Edit</a></button>
-                <button type="button" class="btn btn-danger"><a href="{{path('remove_outcome', {'id':outcome.id})}}">Remove</a></button>
-            </div>
-        </div>
+        {% set title = outcome.title %}
+        {% set amount = outcome.amount %}
+        {% set id = outcome.id %}
+        {% include "commons/card.html.twig" %}
     {% endfor %}
 
 {% endblock %}

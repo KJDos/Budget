@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    {% if outcomes is defined %}
+        {% set type = 'outcome' %}
+    {% elseif incomes is defined %}
+        {% set type = 'income' %} 
+    {% endif %}
+    
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#new{{type}}Modal">
+      New {{type}}
+    </button>
+
+    <div class="modal fade" id="new{{type}}Modal" tabindex="-1" aria-labelledby="new{{type}}Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="new{{type}}Modal">Add a new {{type}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{form_start(form)}}
+                        {{form_widget(form)}}
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if outcomes is defined %}
+        {% for outcome in outcomes %}
+            {% set title = outcome.title %}
+            {% set amount = outcome.amount %}
+            {% set id = outcome.id %}
+            {% set editPath = path('edit_outcome', {'id': id}) %}
+            {% set removePath = path('remove_outcome', {'id': id}) %}
+            {% include "commons/card.html.twig" %}
+        {% endfor %}
+    {% elseif incomes is defined %}
+        {% for income in incomes %}
+            {% set title = income.title %}
+            {% set amount = income.amount %}
+            {% set id = income.id %}
+            {% set editPath = path('edit_income', {'id': id}) %}
+            {% set removePath = path('remove_income', {'id': id}) %}
+            {% include "commons/card.html.twig" %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

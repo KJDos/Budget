@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-
-        {% include "commons/nav.html.twig" %}
-
-        <div class="container p-3">
-            {% for label, messages in app.flashes %}
-                <div class="col p-3">
-                    {% for message in messages %}
-                        <div class="alert-{{label}}">
-                            <p>{{message | raw}}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-
-            {% block body %}{% endblock %}
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    {% include "commons/nav.html.twig" %}
+    <div class="container">
         
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('bootstrap') }}
-        {% endblock %}
-    </body>
+        {% for label, messages in app.flashes %}
+            <div class="col m-3">
+                {% for message in messages %}
+                    <div class="alert-{{label}} p-2 d-flex">
+                        <p class="m-auto">{{message | raw}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    
+        {% block body %}{% endblock %}
+    
+    </div>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('bootstrap') }}
+        {{ encore_entry_script_tags('navbar') }}
+    {% endblock %}
+</body>
 </html>

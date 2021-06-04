@@ -35,7 +35,7 @@ class IncomeController extends AbstractController
             return $this->redirectToRoute('income');
         }
 
-        return $this->render('income/income.html.twig', [
+        return $this->render('commons/render.html.twig', [
             'incomes' => $incomes,
             'form' => $form->createView()
         ]);

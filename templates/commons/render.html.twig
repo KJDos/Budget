@@ -7,6 +7,8 @@
         {% set type = 'outcome' %}
     {% elseif incomes is defined %}
         {% set type = 'income' %} 
+    {% elseif loans is defined %}
+        {% set type = 'loan' %} 
     {% endif %}
     
     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#new{{type}}Modal">
